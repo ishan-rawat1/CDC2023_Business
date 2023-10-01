@@ -609,7 +609,87 @@ for index, row in grouped_1970.iterrows():
 
 
 
+# 5 decades maximum total sales analysis
+## 1. For calculating this we had to group the developer columns and the total sales column and find the sum of the total sales. After doing this, we had to sort it in descending order.
+```python
+#1970 sales
+df_1970['Total Sales'] = df_1970['Total Sales'].str[:-1].astype(float)
+grouped_sales = df_1970.groupby('Developer')['Total Sales'].sum()
+sorted_sales = grouped_sales.sort_values(ascending=False)
+print(sorted_sales.head(10))
+```
+## 2. Console track data analysis
+We separated the console name and how many games were created from each console.
+#1970 example
+```python
+grouped = df_1970.groupby('Console')['Game'].apply(list).reset_index()
+for index, row in grouped.iterrows():
+    print(f"Console: {row['Console']}")
+    for game in row['Game']:
+        print(f" - {game}")
+    print("\n")
+```
+
+## 3. We found the average value for each console and sorted by descending order **FOR CRITIC Scores**
+#1970 example
+```python
+grouped_1970 = df_1970.groupby('Console')['Critic Score'].apply(list).reset_index()
 
 
+# Creating a dictionary to store average scores for each Console
+avg_scores_dict_1970 = {}
 
+
+for index, row in grouped_1970.iterrows():
+    # Filtering out invalid scores
+    valid_scores_1970 = [game for game in row['Critic Score'] if game != '' and pd.notna(game) and isinstance(game, (int, float))]
+
+
+    if valid_scores_1970:
+        avg_1970 = sum(valid_scores_1970) / len(valid_scores_1970)
+        avg_scores_dict_1970[row['Console']] = (avg_1970, len(valid_scores_1970))
+
+
+# Sorting Consoles by their average scores in descending order
+sorted_Consoles_1970 = sorted(avg_scores_dict_1970.items(), key=lambda x: (x[1][0], x[1][1]), reverse=True)
+
+
+for i, (Console, (avg, count)) in enumerate(sorted_Consoles_1970[:10], 1):
+  #11 to cover unknown
+    print("1970")
+    print(f"Console: {Console}")
+    print("The average critic values for each Console is:", round(avg, 2))
+    print(f"Number of critic scores: {count}")
+    print("\n")
+```
+## 4. The same process was done with the **USER Values**
+```python
+grouped_1970 = df_1970.groupby('Console')['User Score'].apply(list).reset_index()
+
+
+avg_scores_dict_1970 = {}
+
+
+for index, row in grouped_1970.iterrows():
+    valid_scores_1970 = [game for game in row['User Score'] if game != '' and pd.notna(game) and isinstance(game, (int, float))]
+```
+## 5. We found the difference between average user values and critic values
+#1970 example
+```python
+# Filtering the dataframe for rows where both 'Critic Score' and 'User Score' are not NaN
+valid_df_1970 = df_1970.dropna(subset=['Critic Score', 'User Score']).copy()
+
+
+# Calculating the absolute difference between 'Critic Score' and 'User Score'
+valid_df_1970.loc[:, 'Difference'] = abs(valid_df_1970['Critic Score'] - valid_df_1970['User Score'])
+
+
+# Sorting the dataframe by the 'Difference' column in descending order and getting the top 10 rows
+top_10_diff_1970 = valid_df_1970.sort_values(by='Difference', ascending=False).head(10)
+
+
+# Displaying the Console(s) with the maximum difference
+print("1970")
+print(top_10_diff_1970[['Console', 'Difference']])
+```
 
