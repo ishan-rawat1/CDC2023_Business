@@ -86,7 +86,7 @@ for publisher, count in sorted_publisher_counts:
 * Grouped the data by 'Publisher' and gathered the 'Critic Score' for each.
 * Filtered out invalid or missing scores.
 * Computed the average critic score for each publisher.
-* Sorted the publishers by the average score in descending order and displayed the results.
+* Sorted the publishers by the average score in descending order and displayed the results. (used a help from open resources and Chat-GPT)
 ```python
 grouped1 = df.groupby('Publisher')['Critic Score'].apply(list).reset_index()
 
