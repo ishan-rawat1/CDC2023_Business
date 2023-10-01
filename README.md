@@ -1,4 +1,12 @@
 # Analysis Steps
+[Original Code (Business Track Data Analysis)](https://colab.research.google.com/drive/1SzMsMZXpk-7cf_PaAplUZvwYN2PaZUeC?usp=sharing)
+
+[Original code (Decade Business Track Data Analysis)](https://colab.research.google.com/drive/12FeP_gnp251kdYqXN9WirafZF51_7Qq-?usp=sharing)
+
+[Original code (5 decades maximum total sales analysis)](https://colab.research.google.com/drive/1GZPCw5SGscJKxjpbOIeCGD63gJX-PVW7?usp=sharing)
+
+[Original code (Console Track Data Analysis)](https://colab.research.google.com/drive/1woxNkUvqCFqtURBsapKmkiiEKIjeVq81?usp=sharing)
+
 ## 1. Data Importation
 The code begins by importing necessary libraries and then uploading a CSV file containing the dataset. This is done using Google Colab's **'files.upload()'** method.
 
