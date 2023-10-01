@@ -22,6 +22,7 @@ import re
 data = files.upload()
 ```
 ## 2. Data Preprocessing
+* For this step we had to use information from open resources and Chat-GPT
 * The code contains a custom function **'custom_date_converter'** that handles date conversion. We changed the date format from **'01st Jan 88'** to **'01/01/1988'**. This function isn't utilized in the active code, but it's prepared to reformat date strings to a more standard format.
 * Data is read into a pandas dataframe, **'df'.**
 ```python
@@ -30,7 +31,7 @@ data = files.upload()
 
 
 
-# def custom_date_converter(date_str):
+# def custom_date_converter(date_str):                     
 #     if not isinstance(date_str, str):
 #         return date_str
 #     """
