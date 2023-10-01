@@ -1,6 +1,6 @@
 Business Track Data Analysis
 
-
+-------------------------
 import numpy as np
 import matplotlib.pyplot as plt
 from google.colab import files
@@ -115,5 +115,1025 @@ top_10_diff = valid_df.sort_values(by='Difference', ascending=False).head(10)
 
 # Displaying the publishers with the maximum difference
 print(top_10_diff[['Publisher', 'Difference']])
+-------------------------
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-------------------------
+Decade Business Track Data Analysis
+-------------------------
+import numpy as np
+import matplotlib.pyplot as plt
+from google.colab import files
+import io
+import pandas as pd
+import re
+
+
+data = files.upload()
+
+df_1970 = pd.read_csv(io.StringIO(data['Business_Dataset(csv)(1970).csv'].decode('utf-8')))
+df_1980 = pd.read_csv(io.StringIO(data['Business_Dataset(csv)(1980).csv'].decode('utf-8')))
+df_1990 = pd.read_csv(io.StringIO(data['Business_Dataset(csv)(1990).csv'].decode('utf-8')))
+df_2000 = pd.read_csv(io.StringIO(data['Business_Dataset(csv)(2000).csv'].decode('utf-8')))
+df_2010 = pd.read_csv(io.StringIO(data['Business_Dataset(csv)(2010).csv'].decode('utf-8')))
+df_2020 = pd.read_csv(io.StringIO(data['Business_Dataset(csv)(2020).csv'].decode('utf-8')))
+
+grouped = df_1970.groupby('Developer')['Game'].apply(list).reset_index()
+for index, row in grouped.iterrows():
+    print(f"Developer: {row['Developer']}")
+    for game in row['Game']:
+        print(f" - {game}")
+    print("\n")
+
+grouped = df_1980.groupby('Developer')['Game'].apply(list).reset_index()
+for index, row in grouped.iterrows():
+    print(f"Developer: {row['Developer']}")
+    for game in row['Game']:
+        print(f" - {game}")
+    print("\n")
+
+grouped = df_1990.groupby('Developer')['Game'].apply(list).reset_index()
+for index, row in grouped.iterrows():
+    print(f"Developer: {row['Developer']}")
+    for game in row['Game']:
+        print(f" - {game}")
+    print("\n")
+
+grouped = df_2000.groupby('Developer')['Game'].apply(list).reset_index()
+for index, row in grouped.iterrows():
+    print(f"Developer: {row['Developer']}")
+    for game in row['Game']:
+        print(f" - {game}")
+    print("\n")
+
+grouped = df_2010.groupby('Developer')['Game'].apply(list).reset_index()
+for index, row in grouped.iterrows():
+    print(f"Developer: {row['Developer']}")
+    for game in row['Game']:
+        print(f" - {game}")
+    print("\n")
+
+grouped = df_2010.groupby('Developer')['Game'].apply(list).reset_index()
+for index, row in grouped.iterrows():
+    print(f"Developer: {row['Developer']}")
+    for game in row['Game']:
+        print(f" - {game}")
+    print("\n")
+
+grouped = df_2020.groupby('Developer')['Game'].apply(list).reset_index()
+for index, row in grouped.iterrows():
+    print(f"Developer: {row['Developer']}")
+    for game in row['Game']:
+        print(f" - {game}")
+    print("\n")
+
+Developer_counts_dict_1970 = {}
+for Developer in df_1970['Developer']:
+    if Developer in Developer_counts_dict_1970:
+        Developer_counts_dict_1970[Developer] += 1
+    else:
+        Developer_counts_dict_1970[Developer] = 1
+sorted_Developer_counts_1970 = sorted(Developer_counts_dict_1970.items(), key=lambda item: item[1], reverse=True)
+for Developer, count in sorted_Developer_counts_1970:
+    print(f"Developer_1970: {Developer}, Game Count: {count}")
+
+Developer_counts_dict_1980 = {}
+for Developer in df_1980['Developer']:
+    if Developer in Developer_counts_dict_1980:
+        Developer_counts_dict_1980[Developer] += 1
+    else:
+        Developer_counts_dict_1980[Developer] = 1
+sorted_Developer_counts_1980 = sorted(Developer_counts_dict_1980.items(), key=lambda item: item[1], reverse=True)
+for Developer, count in sorted_Developer_counts_1980:
+    print(f"Developer_1980: {Developer}, Game Count: {count}")
+
+Developer_counts_dict_1990 = {}
+for Developer in df_1990['Developer']:
+    if Developer in Developer_counts_dict_1990:
+        Developer_counts_dict_1990[Developer] += 1
+    else:
+        Developer_counts_dict_1990[Developer] = 1
+sorted_Developer_counts_1990 = sorted(Developer_counts_dict_1990.items(), key=lambda item: item[1], reverse=True)
+for Developer, count in sorted_Developer_counts_1990:
+    print(f"Developer_1990: {Developer}, Game Count: {count}")
+
+Developer_counts_dict_2000 = {}
+for Developer in df_2000['Developer']:
+    if Developer in Developer_counts_dict_2000:
+        Developer_counts_dict_2000[Developer] += 1
+    else:
+        Developer_counts_dict_2000[Developer] = 1
+sorted_Developer_counts_2000 = sorted(Developer_counts_dict_2000.items(), key=lambda item: item[1], reverse=True)
+for Developer, count in sorted_Developer_counts_2000:
+    print(f"Developer_2000: {Developer}, Game Count: {count}")
+
+Developer_counts_dict_2010 = {}
+for Developer in df_2010['Developer']:
+    if Developer in Developer_counts_dict_2010:
+        Developer_counts_dict_2010[Developer] += 1
+    else:
+        Developer_counts_dict_2010[Developer] = 1
+sorted_Developer_counts_2010 = sorted(Developer_counts_dict_2010.items(), key=lambda item: item[1], reverse=True)
+for Developer, count in sorted_Developer_counts_2010:
+    print(f"Developer_2010: {Developer}, Game Count: {count}")
+
+Developer_counts_dict_2020 = {}
+for Developer in df_2020['Developer']:
+    if Developer in Developer_counts_dict_2020:
+        Developer_counts_dict_2020[Developer] += 1
+    else:
+        Developer_counts_dict_2020[Developer] = 1
+sorted_Developer_counts_2020 = sorted(Developer_counts_dict_2020.items(), key=lambda item: item[1], reverse=True)
+for Developer, count in sorted_Developer_counts_2020:
+    print(f"Developer_2020: {Developer}, Game Count: {count}")
+
+grouped_1970 = df_1970.groupby('Developer')['Critic Score'].apply(list).reset_index()
+
+# Creating a dictionary to store average scores for each Developer
+avg_scores_dict_1970 = {}
+
+for index, row in grouped_1970.iterrows():
+    # Filtering out invalid scores
+    valid_scores_1970 = [game for game in row['Critic Score'] if game != '' and pd.notna(game) and isinstance(game, (int, float))]
+
+    if valid_scores_1970:
+        avg_1970 = sum(valid_scores_1970) / len(valid_scores_1970)
+        avg_scores_dict_1970[row['Developer']] = (avg_1970, len(valid_scores_1970))
+
+# Sorting Developers by their average scores in descending order
+sorted_Developers_1970 = sorted(avg_scores_dict_1970.items(), key=lambda x: (x[1][0], x[1][1]), reverse=True)
+
+for i, (Developer, (avg, count)) in enumerate(sorted_Developers_1970[:10], 1):
+  #11 to cover unknown
+    print("1970")
+    print(f"Developer: {Developer}")
+    print("The average critic values for each Developer is:", round(avg, 2))
+    print(f"Number of critic scores: {count}")
+    print("\n")
+
+grouped_1980 = df_1980.groupby('Developer')['Critic Score'].apply(list).reset_index()
+
+# Creating a dictionary to store average scores for each Developer
+avg_scores_dict_1980 = {}
+
+for index, row in grouped_1980.iterrows():
+    # Filtering out invalid scores
+    valid_scores_1980 = [game for game in row['Critic Score'] if game != '' and pd.notna(game) and isinstance(game, (int, float))]
+
+    if valid_scores_1980:
+        avg_1980 = sum(valid_scores_1980) / len(valid_scores_1980)
+        avg_scores_dict_1980[row['Developer']] = (avg_1980, len(valid_scores_1980))
+
+# Sorting Developers by their average scores in descending order
+sorted_Developers_1980 = sorted(avg_scores_dict_1980.items(), key=lambda x: (x[1][0], x[1][1]), reverse=True)
+
+for i, (Developer, (avg, count)) in enumerate(sorted_Developers_1980[:10], 1):
+    print("1980")
+    print(f"Developer: {Developer}")
+    print("The average critic values for each Developer is:", round(avg, 2))
+    print(f"Number of critic scores: {count}")
+    print("\n")
+
+grouped_1990 = df_1980.groupby('Developer')['Critic Score'].apply(list).reset_index()
+
+# Creating a dictionary to store average scores for each Developer
+avg_scores_dict_1990 = {}
+
+for index, row in grouped_1990.iterrows():
+    # Filtering out invalid scores
+    valid_scores_1990 = [game for game in row['Critic Score'] if game != '' and pd.notna(game) and isinstance(game, (int, float))]
+
+    if valid_scores_1990:
+        avg_1990 = sum(valid_scores_1990) / len(valid_scores_1990)
+        avg_scores_dict_1990[row['Developer']] = (avg_1990, len(valid_scores_1990))
+
+# Sorting Developers by their average scores in descending order
+sorted_Developers_1990 = sorted(avg_scores_dict_1990.items(), key=lambda x: (x[1][0], x[1][1]), reverse=True)
+
+for i, (Developer, (avg, count)) in enumerate(sorted_Developers_1990[:10], 1):
+    print("1990")
+    print(f"Developer: {Developer}")
+    print("The average critic values for each Developer is:", round(avg, 2))
+    print(f"Number of critic scores: {count}")
+    print("\n")
+
+grouped_2000 = df_2000.groupby('Developer')['Critic Score'].apply(list).reset_index()
+
+# Creating a dictionary to store average scores for each Developer
+avg_scores_dict_2000 = {}
+
+for index, row in grouped_2000.iterrows():
+    # Filtering out invalid scores
+    valid_scores_2000 = [game for game in row['Critic Score'] if game != '' and pd.notna(game) and isinstance(game, (int, float))]
+
+    if valid_scores_2000:
+        avg_2000 = sum(valid_scores_2000) / len(valid_scores_2000)
+        avg_scores_dict_2000[row['Developer']] = (avg_2000, len(valid_scores_2000))
+
+# Sorting Developers by their average scores in descending order
+sorted_Developers_2000 = sorted(avg_scores_dict_2000.items(), key=lambda x: (x[1][0], x[1][1]), reverse=True)
+
+for i, (Developer, (avg, count)) in enumerate(sorted_Developers_2000[:10], 1):
+    print("2000")
+    print(f"Developer: {Developer}")
+    print("The average critic values for each Developer is:", round(avg, 2))
+    print(f"Number of critic scores: {count}")
+    print("\n")
+
+grouped_2010 = df_2010.groupby('Developer')['Critic Score'].apply(list).reset_index()
+
+# Creating a dictionary to store average scores for each Developer
+avg_scores_dict_2010 = {}
+
+for index, row in grouped_2010.iterrows():
+    # Filtering out invalid scores
+    valid_scores_2010 = [game for game in row['Critic Score'] if game != '' and pd.notna(game) and isinstance(game, (int, float))]
+
+    if valid_scores_2010:
+        avg_2010 = sum(valid_scores_2010) / len(valid_scores_2010)
+        avg_scores_dict_2010[row['Developer']] = (avg_2010, len(valid_scores_2010))
+
+# Sorting Developers by their average scores in descending order
+sorted_Developers_2010 = sorted(avg_scores_dict_2010.items(), key=lambda x: (x[1][0], x[1][1]), reverse=True)
+
+for i, (Developer, (avg, count)) in enumerate(sorted_Developers_2010[:10], 1):
+    print("2010")
+    print(f"Developer: {Developer}")
+    print("The average critic values for each Developer is:", round(avg, 2))
+    print(f"Number of critic scores: {count}")
+    print("\n")
+
+grouped_2020 = df_2020.groupby('Developer')['Critic Score'].apply(list).reset_index()
+
+# Creating a dictionary to store average scores for each Developer
+avg_scores_dict_2020 = {}
+
+for index, row in grouped_2020.iterrows():
+    # Filtering out invalid scores
+    valid_scores_2020 = [game for game in row['Critic Score'] if game != '' and pd.notna(game) and isinstance(game, (int, float))]
+
+    if valid_scores_2020:
+        avg_2020 = sum(valid_scores_2020) / len(valid_scores_2020)
+        avg_scores_dict_2020[row['Developer']] = (avg_2020, len(valid_scores_2020))
+
+# Sorting Developers by their average scores in descending order
+sorted_Developers_2020 = sorted(avg_scores_dict_2020.items(), key=lambda x: (x[1][0], x[1][1]), reverse=True)
+
+for i, (Developer, (avg, count)) in enumerate(sorted_Developers_2020[:10], 1):
+  #11 to account for unknown
+    print("2020")
+    print(f"Developer: {Developer}")
+    print("The average critic values for each Developer is:", round(avg, 2))
+    print(f"Number of critic scores: {count}")
+    print("\n")
+grouped_1970 = df_1970.groupby('Developer')['User Score'].apply(list).reset_index()
+
+avg_scores_dict_1970 = {}
+
+for index, row in grouped_1970.iterrows():
+    valid_scores_1970 = [game for game in row['User Score'] if game != '' and pd.notna(game) and isinstance(game, (int, float))]
+
+    if valid_scores_1970:
+        avg_1970 = sum(valid_scores_1970) / len(valid_scores_1970)
+        avg_scores_dict_1970[row['Developer']] = (avg_1970, len(valid_scores_1970))
+
+sorted_Developers_1970 = sorted(avg_scores_dict_1970.items(), key=lambda x: (x[1][0], x[1][1]), reverse=True)
+
+for i, (Developer, (avg, count)) in enumerate(sorted_Developers_1970[:10], 1):
+  #11 to cover unknown
+    print("1970")
+    print(f"Developer: {Developer}")
+    print("The average user values for each Developer is:", round(avg, 2))
+    print(f"Number of user scores: {count}")
+    print("\n")
+
+grouped_1980 = df_1980.groupby('Developer')['User Score'].apply(list).reset_index()
+
+avg_scores_dict_1980 = {}
+
+for index, row in grouped_1980.iterrows():
+    valid_scores_1980 = [game for game in row['User Score'] if game != '' and pd.notna(game) and isinstance(game, (int, float))]
+
+    if valid_scores_1980:
+        avg_1980 = sum(valid_scores_1980) / len(valid_scores_1980)
+        avg_scores_dict_1980[row['Developer']] = (avg_1980, len(valid_scores_1980))
+
+sorted_Developers_1980 = sorted(avg_scores_dict_1980.items(), key=lambda x: (x[1][0], x[1][1]), reverse=True)
+
+for i, (Developer, (avg, count)) in enumerate(sorted_Developers_1980[:10], 1):
+    print("1980")
+    print(f"Developer: {Developer}")
+    print("The average user values for each Developer is:", round(avg, 2))
+    print(f"Number of user scores: {count}")
+    print("\n")
+
+grouped_1990 = df_1980.groupby('Developer')['User Score'].apply(list).reset_index()
+
+avg_scores_dict_1990 = {}
+
+for index, row in grouped_1990.iterrows():
+    valid_scores_1990 = [game for game in row['User Score'] if game != '' and pd.notna(game) and isinstance(game, (int, float))]
+
+    if valid_scores_1990:
+        avg_1990 = sum(valid_scores_1990) / len(valid_scores_1990)
+        avg_scores_dict_1990[row['Developer']] = (avg_1990, len(valid_scores_1990))
+
+sorted_Developers_1990 = sorted(avg_scores_dict_1990.items(), key=lambda x: (x[1][0], x[1][1]), reverse=True)
+
+for i, (Developer, (avg, count)) in enumerate(sorted_Developers_1990[:10], 1):
+    print("1990")
+    print(f"Developer: {Developer}")
+    print("The average user values for each Developer is:", round(avg, 2))
+    print(f"Number of user scores: {count}")
+    print("\n")
+
+grouped_2000 = df_2000.groupby('Developer')['User Score'].apply(list).reset_index()
+
+avg_scores_dict_2000 = {}
+
+for index, row in grouped_2000.iterrows():
+    valid_scores_2000 = [game for game in row['User Score'] if game != '' and pd.notna(game) and isinstance(game, (int, float))]
+
+    if valid_scores_2000:
+        avg_2000 = sum(valid_scores_2000) / len(valid_scores_2000)
+        avg_scores_dict_2000[row['Developer']] = (avg_2000, len(valid_scores_2000))
+
+sorted_Developers_2000 = sorted(avg_scores_dict_2000.items(), key=lambda x: (x[1][0], x[1][1]), reverse=True)
+
+for i, (Developer, (avg, count)) in enumerate(sorted_Developers_2000[:10], 1):
+    print("2000")
+    print(f"Developer: {Developer}")
+    print("The average user values for each Developer is:", round(avg, 2))
+    print(f"Number of user scores: {count}")
+    print("\n")
+
+grouped_2010 = df_2010.groupby('Developer')['User Score'].apply(list).reset_index()
+
+avg_scores_dict_2010 = {}
+
+for index, row in grouped_2010.iterrows():
+    valid_scores_2010 = [game for game in row['User Score'] if game != '' and pd.notna(game) and isinstance(game, (int, float))]
+
+    if valid_scores_2010:
+        avg_2010 = sum(valid_scores_2010) / len(valid_scores_2010)
+        avg_scores_dict_2010[row['Developer']] = (avg_2010, len(valid_scores_2010))
+
+sorted_Developers_2010 = sorted(avg_scores_dict_2010.items(), key=lambda x: (x[1][0], x[1][1]), reverse=True)
+
+for i, (Developer, (avg, count)) in enumerate(sorted_Developers_2010[:10], 1):
+    print("2010")
+    print(f"Developer: {Developer}")
+    print("The average user values for each Developer is:", round(avg, 2))
+    print(f"Number of user scores: {count}")
+    print("\n")
+
+grouped_2020 = df_2020.groupby('Developer')['User Score'].apply(list).reset_index()
+
+avg_scores_dict_2020 = {}
+
+for index, row in grouped_2020.iterrows():
+    valid_scores_2020 = [game for game in row['User Score'] if game != '' and pd.notna(game) and isinstance(game, (int, float))]
+
+    if valid_scores_2020:
+        avg_2020 = sum(valid_scores_2020) / len(valid_scores_2020)
+        avg_scores_dict_2020[row['Developer']] = (avg_2020, len(valid_scores_2020))
+
+sorted_Developers_2020 = sorted(avg_scores_dict_2020.items(), key=lambda x: (x[1][0], x[1][1]), reverse=True)
+
+for i, (Developer, (avg, count)) in enumerate(sorted_Developers_2020[:10], 1):
+  #11 to account for unknown
+    print("2020")
+    print(f"Developer: {Developer}")
+    print("The average user values for each Developer is:", round(avg, 2))
+    print(f"Number of user scores: {count}")
+    print("\n")
+
+# Filtering the dataframe for rows where both 'Critic Score' and 'User Score' are not NaN
+valid_df_1970 = df_1970.dropna(subset=['Critic Score', 'User Score']).copy()
+
+# Calculating the absolute difference between 'Critic Score' and 'User Score'
+valid_df_1970.loc[:, 'Difference'] = abs(valid_df_1970['Critic Score'] - valid_df_1970['User Score'])
+
+# Sorting the dataframe by the 'Difference' column in descending order and getting the top 10 rows
+top_10_diff_1970 = valid_df_1970.sort_values(by='Difference', ascending=False).head(10)
+
+# Displaying the Developer(s) with the maximum difference
+print("1970")
+print(top_10_diff_1970[['Developer', 'Difference']])
+
+
+# Filtering the dataframe for rows where both 'Critic Score' and 'User Score' are not NaN
+valid_df_1980 = df_1980.dropna(subset=['Critic Score', 'User Score']).copy()
+
+# Calculating the absolute difference between 'Critic Score' and 'User Score'
+valid_df_1980.loc[:, 'Difference'] = abs(valid_df_1980['Critic Score'] - valid_df_1980['User Score'])
+
+# Sorting the dataframe by the 'Difference' column in descending order and getting the top 10 rows
+top_10_diff_1980 = valid_df_1980.sort_values(by='Difference', ascending=False).head(10)
+
+# Displaying the Developer(s) with the maximum difference
+print("1980")
+print(top_10_diff_1980[['Developer', 'Difference']])
+
+
+# Filtering the dataframe for rows where both 'Critic Score' and 'User Score' are not NaN
+valid_df_1990 = df_1990.dropna(subset=['Critic Score', 'User Score']).copy()
+
+# Calculating the absolute difference between 'Critic Score' and 'User Score'
+valid_df_1990.loc[:, 'Difference'] = abs(valid_df_1990['Critic Score'] - valid_df_1990['User Score'])
+
+# Sorting the dataframe by the 'Difference' column in descending order and getting the top 10 rows
+top_10_diff_1990 = valid_df_1990.sort_values(by='Difference', ascending=False).head(10)
+
+# Displaying the Developer(s) with the maximum difference
+print(top_10_diff_1990[['Developer', 'Difference']])
+
+
+# Filtering the dataframe for rows where both 'Critic Score' and 'User Score' are not NaN
+valid_df_2000 = df_2000.dropna(subset=['Critic Score', 'User Score']).copy()
+
+# Calculating the absolute difference between 'Critic Score' and 'User Score'
+valid_df_2000.loc[:, 'Difference'] = abs(valid_df_2000['Critic Score'] - valid_df_2000['User Score'])
+
+# Sorting the dataframe by the 'Difference' column in descending order and getting the top 10 rows
+top_10_diff_2000 = valid_df_2000.sort_values(by='Difference', ascending=False).head(10)
+
+# Displaying the Developer(s) with the maximum difference
+print("2000")
+print(top_10_diff_2000[['Developer', 'Difference']])
+
+
+# Filtering the dataframe for rows where both 'Critic Score' and 'User Score' are not NaN
+valid_df_2010 = df_2010.dropna(subset=['Critic Score', 'User Score']).copy()
+
+# Calculating the absolute difference between 'Critic Score' and 'User Score'
+valid_df_2010.loc[:, 'Difference'] = abs(valid_df_2010['Critic Score'] - valid_df_2010['User Score'])
+
+# Sorting the dataframe by the 'Difference' column in descending order and getting the top 10 rows
+top_10_diff_2010 = valid_df_2010.sort_values(by='Difference', ascending=False).head(10)
+
+# Displaying the Developer(s) with the maximum difference
+print("2010")
+print(top_10_diff_2010[['Developer', 'Difference']])
+
+
+# Filtering the dataframe for rows where both 'Critic Score' and 'User Score' are not NaN
+valid_df_2020 = df_2020.dropna(subset=['Critic Score', 'User Score']).copy()
+
+# Calculating the absolute difference between 'Critic Score' and 'User Score'
+valid_df_2020.loc[:, 'Difference'] = abs(valid_df_2020['Critic Score'] - valid_df_2020['User Score'])
+
+# Sorting the dataframe by the 'Difference' column in descending order and getting the top 10 rows
+top_10_diff_2020 = valid_df_2020.sort_values(by='Difference', ascending=False).head(10)
+
+# Displaying the Developer(s) with the maximum difference
+print("2020")
+print(top_10_diff_2020[['Developer', 'Difference']])
+
+
+#To find the average Japanese sales, North American sales and PAL sales and other sales
+
+grouped_1970 = df_1970.groupby('Japan Sales')['Total Sales'].apply(list).reset_index()
+
+
+for index, row in grouped_1970.iterrows():
+    # Filter out invalid scores
+    valid_scores_1970 = [game for game in row['Japan Sales'] if game != '' and pd.notna(game) and isinstance(game, (int, float))]
+
+    if valid_scores_1970:
+        percentage_1970 = (grouped_1970['Japan Sales'] /grouped_1970['Total Sales']) * 100
+        average_percentage = percentage_1970.mean()
+        print("The average percentage sales for Japan is : ", average_percentage)
+-------------------------
+
+
+
+
+
+
+
+
+
+
+
+-------------------------
+Console Track Data Analysis
+-------------------------
+
+import numpy as np
+import matplotlib.pyplot as plt
+from google.colab import files
+import io
+import pandas as pd
+import re
+
+
+data = files.upload()
+
+df_1970 = pd.read_csv(io.StringIO(data['Business_Dataset(csv)(1970).csv'].decode('utf-8')))
+df_1980 = pd.read_csv(io.StringIO(data['Business_Dataset(csv)(1980).csv'].decode('utf-8')))
+df_1990 = pd.read_csv(io.StringIO(data['Business_Dataset(csv)(1990).csv'].decode('utf-8')))
+df_2000 = pd.read_csv(io.StringIO(data['Business_Dataset(csv)(2000).csv'].decode('utf-8')))
+df_2010 = pd.read_csv(io.StringIO(data['Business_Dataset(csv)(2010).csv'].decode('utf-8')))
+df_2020 = pd.read_csv(io.StringIO(data['Business_Dataset(csv)(2020).csv'].decode('utf-8')))
+
+Console_counts_dict_1970 = {}
+for Console in df_1970['Console']:
+    if Console in Console_counts_dict_1970:
+        Console_counts_dict_1970[Console] += 1
+    else:
+        Console_counts_dict_1970[Console] = 1
+sorted_Console_counts_1970 = sorted(Console_counts_dict_1970.items(), key=lambda item: item[1], reverse=True)
+for Console, count in sorted_Console_counts_1970:
+    print(f"Console_1970: {Console}, Game Count: {count}")
+
+Console_counts_dict_1980 = {}
+for Console in df_1980['Console']:
+    if Console in Console_counts_dict_1980:
+        Console_counts_dict_1980[Console] += 1
+    else:
+        Console_counts_dict_1980[Console] = 1
+sorted_Console_counts_1980 = sorted(Console_counts_dict_1980.items(), key=lambda item: item[1], reverse=True)
+for Console, count in sorted_Console_counts_1980:
+    print(f"Console_1980: {Console}, Game Count: {count}")
+
+Console_counts_dict_1990 = {}
+for Console in df_1990['Console']:
+    if Console in Console_counts_dict_1990:
+        Console_counts_dict_1990[Console] += 1
+    else:
+        Console_counts_dict_1990[Console] = 1
+sorted_Console_counts_1990 = sorted(Console_counts_dict_1990.items(), key=lambda item: item[1], reverse=True)
+for Console, count in sorted_Console_counts_1990:
+    print(f"Console_1990: {Console}, Game Count: {count}")
+
+Console_counts_dict_2000 = {}
+for Console in df_2000['Console']:
+    if Console in Console_counts_dict_2000:
+        Console_counts_dict_2000[Console] += 1
+    else:
+        Console_counts_dict_2000[Console] = 1
+sorted_Console_counts_2000 = sorted(Console_counts_dict_2000.items(), key=lambda item: item[1], reverse=True)
+for Console, count in sorted_Console_counts_2000:
+    print(f"Console_2000: {Console}, Game Count: {count}")
+
+Console_counts_dict_2010 = {}
+for Console in df_2010['Console']:
+    if Console in Console_counts_dict_2010:
+        Console_counts_dict_2010[Console] += 1
+    else:
+        Console_counts_dict_2010[Console] = 1
+sorted_Console_counts_2010 = sorted(Console_counts_dict_2010.items(), key=lambda item: item[1], reverse=True)
+for Console, count in sorted_Console_counts_2010:
+    print(f"Console_2010: {Console}, Game Count: {count}")
+
+Console_counts_dict_2020 = {}
+for Console in df_2020['Console']:
+    if Console in Console_counts_dict_2020:
+        Console_counts_dict_2020[Console] += 1
+    else:
+        Console_counts_dict_2020[Console] = 1
+sorted_Console_counts_2020 = sorted(Console_counts_dict_2020.items(), key=lambda item: item[1], reverse=True)
+for Console, count in sorted_Console_counts_2020:
+    print(f"Console_2020: {Console}, Game Count: {count}")
+
+grouped_1970 = df_1970.groupby('Console')['Critic Score'].apply(list).reset_index()
+
+# Creating a dictionary to store average scores for each Console
+avg_scores_dict_1970 = {}
+
+for index, row in grouped_1970.iterrows():
+    # Filtering out invalid scores
+    valid_scores_1970 = [game for game in row['Critic Score'] if game != '' and pd.notna(game) and isinstance(game, (int, float))]
+
+    if valid_scores_1970:
+        avg_1970 = sum(valid_scores_1970) / len(valid_scores_1970)
+        avg_scores_dict_1970[row['Console']] = (avg_1970, len(valid_scores_1970))
+
+# Sorting Consoles by their average scores in descending order
+sorted_Consoles_1970 = sorted(avg_scores_dict_1970.items(), key=lambda x: (x[1][0], x[1][1]), reverse=True)
+
+for i, (Console, (avg, count)) in enumerate(sorted_Consoles_1970[:10], 1):
+  #11 to cover unknown
+    print("1970")
+    print(f"Console: {Console}")
+    print("The average critic values for each Console is:", round(avg, 2))
+    print(f"Number of critic scores: {count}")
+    print("\n")
+
+grouped_1980 = df_1980.groupby('Console')['Critic Score'].apply(list).reset_index()
+
+# Creating a dictionary to store average scores for each Console
+avg_scores_dict_1980 = {}
+
+for index, row in grouped_1980.iterrows():
+    # Filtering out invalid scores
+    valid_scores_1980 = [game for game in row['Critic Score'] if game != '' and pd.notna(game) and isinstance(game, (int, float))]
+
+    if valid_scores_1980:
+        avg_1980 = sum(valid_scores_1980) / len(valid_scores_1980)
+        avg_scores_dict_1980[row['Console']] = (avg_1980, len(valid_scores_1980))
+
+# Sorting Consoles by their average scores in descending order
+sorted_Consoles_1980 = sorted(avg_scores_dict_1980.items(), key=lambda x: (x[1][0], x[1][1]), reverse=True)
+
+for i, (Console, (avg, count)) in enumerate(sorted_Consoles_1980[:10], 1):
+    print("1980")
+    print(f"Console: {Console}")
+    print("The average critic values for each Console is:", round(avg, 2))
+    print(f"Number of critic scores: {count}")
+    print("\n")
+
+grouped_1990 = df_1980.groupby('Console')['Critic Score'].apply(list).reset_index()
+
+# Creating a dictionary to store average scores for each Console
+avg_scores_dict_1990 = {}
+
+for index, row in grouped_1990.iterrows():
+    # Filtering out invalid scores
+    valid_scores_1990 = [game for game in row['Critic Score'] if game != '' and pd.notna(game) and isinstance(game, (int, float))]
+
+    if valid_scores_1990:
+        avg_1990 = sum(valid_scores_1990) / len(valid_scores_1990)
+        avg_scores_dict_1990[row['Console']] = (avg_1990, len(valid_scores_1990))
+
+# Sorting Consoles by their average scores in descending order
+sorted_Consoles_1990 = sorted(avg_scores_dict_1990.items(), key=lambda x: (x[1][0], x[1][1]), reverse=True)
+
+for i, (Console, (avg, count)) in enumerate(sorted_Consoles_1990[:10], 1):
+    print("1990")
+    print(f"Console: {Console}")
+    print("The average critic values for each Console is:", round(avg, 2))
+    print(f"Number of critic scores: {count}")
+    print("\n")
+
+grouped_2000 = df_2000.groupby('Console')['Critic Score'].apply(list).reset_index()
+
+# Creating a dictionary to store average scores for each Console
+avg_scores_dict_2000 = {}
+
+for index, row in grouped_2000.iterrows():
+    # Filtering out invalid scores
+    valid_scores_2000 = [game for game in row['Critic Score'] if game != '' and pd.notna(game) and isinstance(game, (int, float))]
+
+    if valid_scores_2000:
+        avg_2000 = sum(valid_scores_2000) / len(valid_scores_2000)
+        avg_scores_dict_2000[row['Console']] = (avg_2000, len(valid_scores_2000))
+
+# Sorting Consoles by their average scores in descending order
+sorted_Consoles_2000 = sorted(avg_scores_dict_2000.items(), key=lambda x: (x[1][0], x[1][1]), reverse=True)
+
+for i, (Console, (avg, count)) in enumerate(sorted_Consoles_2000[:10], 1):
+    print("2000")
+    print(f"Console: {Console}")
+    print("The average critic values for each Console is:", round(avg, 2))
+    print(f"Number of critic scores: {count}")
+    print("\n")
+
+grouped_2010 = df_2010.groupby('Console')['Critic Score'].apply(list).reset_index()
+
+# Creating a dictionary to store average scores for each Console
+avg_scores_dict_2010 = {}
+
+for index, row in grouped_2010.iterrows():
+    # Filtering out invalid scores
+    valid_scores_2010 = [game for game in row['Critic Score'] if game != '' and pd.notna(game) and isinstance(game, (int, float))]
+
+    if valid_scores_2010:
+        avg_2010 = sum(valid_scores_2010) / len(valid_scores_2010)
+        avg_scores_dict_2010[row['Console']] = (avg_2010, len(valid_scores_2010))
+
+# Sorting Consoles by their average scores in descending order
+sorted_Consoles_2010 = sorted(avg_scores_dict_2010.items(), key=lambda x: (x[1][0], x[1][1]), reverse=True)
+
+for i, (Console, (avg, count)) in enumerate(sorted_Consoles_2010[:10], 1):
+    print("2010")
+    print(f"Console: {Console}")
+    print("The average critic values for each Console is:", round(avg, 2))
+    print(f"Number of critic scores: {count}")
+    print("\n")
+
+grouped_2020 = df_2020.groupby('Console')['Critic Score'].apply(list).reset_index()
+
+# Creating a dictionary to store average scores for each Console
+avg_scores_dict_2020 = {}
+
+for index, row in grouped_2020.iterrows():
+    # Filtering out invalid scores
+    valid_scores_2020 = [game for game in row['Critic Score'] if game != '' and pd.notna(game) and isinstance(game, (int, float))]
+
+    if valid_scores_2020:
+        avg_2020 = sum(valid_scores_2020) / len(valid_scores_2020)
+        avg_scores_dict_2020[row['Console']] = (avg_2020, len(valid_scores_2020))
+
+# Sorting Consoles by their average scores in descending order
+sorted_Consoles_2020 = sorted(avg_scores_dict_2020.items(), key=lambda x: (x[1][0], x[1][1]), reverse=True)
+
+for i, (Console, (avg, count)) in enumerate(sorted_Consoles_2020[:10], 1):
+  #11 to account for unknown
+    print("2020")
+    print(f"Console: {Console}")
+    print("The average critic values for each Console is:", round(avg, 2))
+    print(f"Number of critic scores: {count}")
+    print("\n")
+grouped_1970 = df_1970.groupby('Console')['User Score'].apply(list).reset_index()
+
+avg_scores_dict_1970 = {}
+
+for index, row in grouped_1970.iterrows():
+    valid_scores_1970 = [game for game in row['User Score'] if game != '' and pd.notna(game) and isinstance(game, (int, float))]
+
+    if valid_scores_1970:
+        avg_1970 = sum(valid_scores_1970) / len(valid_scores_1970)
+        avg_scores_dict_1970[row['Console']] = (avg_1970, len(valid_scores_1970))
+
+sorted_Consoles_1970 = sorted(avg_scores_dict_1970.items(), key=lambda x: (x[1][0], x[1][1]), reverse=True)
+
+for i, (Console, (avg, count)) in enumerate(sorted_Consoles_1970[:10], 1):
+  #11 to cover unknown
+    print("1970")
+    print(f"Console: {Console}")
+    print("The average user values for each Console is:", round(avg, 2))
+    print(f"Number of user scores: {count}")
+    print("\n")
+
+grouped_1980 = df_1980.groupby('Console')['User Score'].apply(list).reset_index()
+
+avg_scores_dict_1980 = {}
+
+for index, row in grouped_1980.iterrows():
+    valid_scores_1980 = [game for game in row['User Score'] if game != '' and pd.notna(game) and isinstance(game, (int, float))]
+
+    if valid_scores_1980:
+        avg_1980 = sum(valid_scores_1980) / len(valid_scores_1980)
+        avg_scores_dict_1980[row['Console']] = (avg_1980, len(valid_scores_1980))
+
+sorted_Consoles_1980 = sorted(avg_scores_dict_1980.items(), key=lambda x: (x[1][0], x[1][1]), reverse=True)
+
+for i, (Console, (avg, count)) in enumerate(sorted_Consoles_1980[:10], 1):
+    print("1980")
+    print(f"Console: {Console}")
+    print("The average user values for each Console is:", round(avg, 2))
+    print(f"Number of user scores: {count}")
+    print("\n")
+
+grouped_1990 = df_1980.groupby('Console')['User Score'].apply(list).reset_index()
+
+avg_scores_dict_1990 = {}
+
+for index, row in grouped_1990.iterrows():
+    valid_scores_1990 = [game for game in row['User Score'] if game != '' and pd.notna(game) and isinstance(game, (int, float))]
+
+    if valid_scores_1990:
+        avg_1990 = sum(valid_scores_1990) / len(valid_scores_1990)
+        avg_scores_dict_1990[row['Console']] = (avg_1990, len(valid_scores_1990))
+
+sorted_Consoles_1990 = sorted(avg_scores_dict_1990.items(), key=lambda x: (x[1][0], x[1][1]), reverse=True)
+
+for i, (Console, (avg, count)) in enumerate(sorted_Consoles_1990[:10], 1):
+    print("1990")
+    print(f"Console: {Console}")
+    print("The average user values for each Console is:", round(avg, 2))
+    print(f"Number of user scores: {count}")
+    print("\n")
+
+grouped_2000 = df_2000.groupby('Console')['User Score'].apply(list).reset_index()
+
+avg_scores_dict_2000 = {}
+
+for index, row in grouped_2000.iterrows():
+    valid_scores_2000 = [game for game in row['User Score'] if game != '' and pd.notna(game) and isinstance(game, (int, float))]
+
+    if valid_scores_2000:
+        avg_2000 = sum(valid_scores_2000) / len(valid_scores_2000)
+        avg_scores_dict_2000[row['Console']] = (avg_2000, len(valid_scores_2000))
+
+sorted_Consoles_2000 = sorted(avg_scores_dict_2000.items(), key=lambda x: (x[1][0], x[1][1]), reverse=True)
+
+for i, (Console, (avg, count)) in enumerate(sorted_Consoles_2000[:10], 1):
+    print("2000")
+    print(f"Console: {Console}")
+    print("The average user values for each Console is:", round(avg, 2))
+    print(f"Number of user scores: {count}")
+    print("\n")
+
+grouped_2010 = df_2010.groupby('Console')['User Score'].apply(list).reset_index()
+
+avg_scores_dict_2010 = {}
+
+for index, row in grouped_2010.iterrows():
+    valid_scores_2010 = [game for game in row['User Score'] if game != '' and pd.notna(game) and isinstance(game, (int, float))]
+
+    if valid_scores_2010:
+        avg_2010 = sum(valid_scores_2010) / len(valid_scores_2010)
+        avg_scores_dict_2010[row['Console']] = (avg_2010, len(valid_scores_2010))
+
+sorted_Consoles_2010 = sorted(avg_scores_dict_2010.items(), key=lambda x: (x[1][0], x[1][1]), reverse=True)
+
+for i, (Console, (avg, count)) in enumerate(sorted_Consoles_2010[:10], 1):
+    print("2010")
+    print(f"Console: {Console}")
+    print("The average user values for each Console is:", round(avg, 2))
+    print(f"Number of user scores: {count}")
+    print("\n")
+
+grouped_2020 = df_2020.groupby('Console')['User Score'].apply(list).reset_index()
+
+avg_scores_dict_2020 = {}
+
+for index, row in grouped_2020.iterrows():
+    valid_scores_2020 = [game for game in row['User Score'] if game != '' and pd.notna(game) and isinstance(game, (int, float))]
+
+    if valid_scores_2020:
+        avg_2020 = sum(valid_scores_2020) / len(valid_scores_2020)
+        avg_scores_dict_2020[row['Console']] = (avg_2020, len(valid_scores_2020))
+
+sorted_Consoles_2020 = sorted(avg_scores_dict_2020.items(), key=lambda x: (x[1][0], x[1][1]), reverse=True)
+
+for i, (Console, (avg, count)) in enumerate(sorted_Consoles_2020[:10], 1):
+  #11 to account for unknown
+    print("2020")
+    print(f"Console: {Console}")
+    print("The average user values for each Console is:", round(avg, 2))
+    print(f"Number of user scores: {count}")
+    print("\n")
+# Filtering the dataframe for rows where both 'Critic Score' and 'User Score' are not NaN
+valid_df_1970 = df_1970.dropna(subset=['Critic Score', 'User Score']).copy()
+
+# Calculating the absolute difference between 'Critic Score' and 'User Score'
+valid_df_1970.loc[:, 'Difference'] = abs(valid_df_1970['Critic Score'] - valid_df_1970['User Score'])
+
+# Sorting the dataframe by the 'Difference' column in descending order and getting the top 10 rows
+top_10_diff_1970 = valid_df_1970.sort_values(by='Difference', ascending=False).head(10)
+
+# Displaying the Console(s) with the maximum difference
+print("1970")
+print(top_10_diff_1970[['Console', 'Difference']])
+
+
+# Filtering the dataframe for rows where both 'Critic Score' and 'User Score' are not NaN
+valid_df_1980 = df_1980.dropna(subset=['Critic Score', 'User Score']).copy()
+
+# Calculating the absolute difference between 'Critic Score' and 'User Score'
+valid_df_1980.loc[:, 'Difference'] = abs(valid_df_1980['Critic Score'] - valid_df_1980['User Score'])
+
+# Sorting the dataframe by the 'Difference' column in descending order and getting the top 10 rows
+top_10_diff_1980 = valid_df_1980.sort_values(by='Difference', ascending=False).head(10)
+
+# Displaying the Console(s) with the maximum difference
+print("1980")
+print(top_10_diff_1980[['Console', 'Difference']])
+
+
+# Filtering the dataframe for rows where both 'Critic Score' and 'User Score' are not NaN
+valid_df_1990 = df_1990.dropna(subset=['Critic Score', 'User Score']).copy()
+
+# Calculating the absolute difference between 'Critic Score' and 'User Score'
+valid_df_1990.loc[:, 'Difference'] = abs(valid_df_1990['Critic Score'] - valid_df_1990['User Score'])
+
+# Sorting the dataframe by the 'Difference' column in descending order and getting the top 10 rows
+top_10_diff_1990 = valid_df_1990.sort_values(by='Difference', ascending=False).head(10)
+
+# Displaying the Console(s) with the maximum difference
+print(top_10_diff_1990[['Console', 'Difference']])
+
+
+# Filtering the dataframe for rows where both 'Critic Score' and 'User Score' are not NaN
+valid_df_2000 = df_2000.dropna(subset=['Critic Score', 'User Score']).copy()
+
+# Calculating the absolute difference between 'Critic Score' and 'User Score'
+valid_df_2000.loc[:, 'Difference'] = abs(valid_df_2000['Critic Score'] - valid_df_2000['User Score'])
+
+# Sorting the dataframe by the 'Difference' column in descending order and getting the top 10 rows
+top_10_diff_2000 = valid_df_2000.sort_values(by='Difference', ascending=False).head(10)
+
+# Displaying the Console(s) with the maximum difference
+print("2000")
+print(top_10_diff_2000[['Console', 'Difference']])
+
+
+# Filtering the dataframe for rows where both 'Critic Score' and 'User Score' are not NaN
+valid_df_2010 = df_2010.dropna(subset=['Critic Score', 'User Score']).copy()
+
+# Calculating the absolute difference between 'Critic Score' and 'User Score'
+valid_df_2010.loc[:, 'Difference'] = abs(valid_df_2010['Critic Score'] - valid_df_2010['User Score'])
+
+# Sorting the dataframe by the 'Difference' column in descending order and getting the top 10 rows
+top_10_diff_2010 = valid_df_2010.sort_values(by='Difference', ascending=False).head(10)
+
+# Displaying the Console(s) with the maximum difference
+print("2010")
+print(top_10_diff_2010[['Console', 'Difference']])
+
+
+# Filtering the dataframe for rows where both 'Critic Score' and 'User Score' are not NaN
+valid_df_2020 = df_2020.dropna(subset=['Critic Score', 'User Score']).copy()
+
+# Calculating the absolute difference between 'Critic Score' and 'User Score'
+valid_df_2020.loc[:, 'Difference'] = abs(valid_df_2020['Critic Score'] - valid_df_2020['User Score'])
+
+# Sorting the dataframe by the 'Difference' column in descending order and getting the top 10 rows
+top_10_diff_2020 = valid_df_2020.sort_values(by='Difference', ascending=False).head(10)
+
+# Displaying the Console(s) with the maximum difference
+print("2020")
+print(top_10_diff_2020[['Console', 'Difference']])
+
+#To find the average Japanese sales, North American sales and PAL sales and other sales
+
+grouped_1970 = df_1970.groupby('Japan Sales')['Total Sales'].apply(list).reset_index()
+
+
+for index, row in grouped_1970.iterrows():
+    # Filter out invalid scores
+    valid_scores_1970 = [game for game in row['Japan Sales'] if game != '' and pd.notna(game) and isinstance(game, (int, float))]
+
+    if valid_scores_1970:
+        percentage_1970 = (grouped_1970['Japan Sales'] /grouped_1970['Total Sales']) * 100
+        average_percentage = percentage_1970.mean()
+        print("The average percentage sales for Japan is : ", average_percentage)
+-------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+-------------------------
+5 decades maximum total sales analysis
+-------------------------
+
+import numpy as np
+import matplotlib.pyplot as plt
+from google.colab import files
+import io
+import pandas as pd
+import re
+
+data = files.upload()
+
+df_1970 = pd.read_csv(io.StringIO(data['Business_Dataset(csv)(1970).csv'].decode('utf-8')))
+df_1980 = pd.read_csv(io.StringIO(data['Business_Dataset(csv)(1980).csv'].decode('utf-8')))
+df_1990 = pd.read_csv(io.StringIO(data['Business_Dataset(csv)(1990).csv'].decode('utf-8')))
+df_2000 = pd.read_csv(io.StringIO(data['Business_Dataset(csv)(2000).csv'].decode('utf-8')))
+df_2010 = pd.read_csv(io.StringIO(data['Business_Dataset(csv)(2010).csv'].decode('utf-8')))
+df_2020 = pd.read_csv(io.StringIO(data['Business_Dataset(csv)(2020).csv'].decode('utf-8')))
+
+#1970 sales
+df_1970['Total Sales'] = df_1970['Total Sales'].str[:-1].astype(float)
+grouped_sales = df_1970.groupby('Developer')['Total Sales'].sum()
+sorted_sales = grouped_sales.sort_values(ascending=False)
+print(sorted_sales.head(10))
+
+#1980 sales
+df_1980['Total Sales'] = df_1980['Total Sales'].str[:-1].astype(float)
+grouped_sales = df_1980.groupby('Developer')['Total Sales'].sum()
+sorted_sales = grouped_sales.sort_values(ascending=False)
+print(sorted_sales.head(10))
+
+#1990 sales
+df_1990['Total Sales'] = df_1990['Total Sales'].str[:-1].astype(float)
+grouped_sales = df_1990.groupby('Developer')['Total Sales'].sum()
+sorted_sales = grouped_sales.sort_values(ascending=False)
+print(sorted_sales.head(10))
+
+#2000 sales
+df_2000['Total Sales'] = df_2000['Total Sales'].str[:-1].astype(float)
+grouped_sales = df_2000.groupby('Developer')['Total Sales'].sum()
+sorted_sales = grouped_sales.sort_values(ascending=False)
+print(sorted_sales.head(10))
+
+#2010 sales
+df_2010['Total Sales'] = df_2010['Total Sales'].str[:-1].astype(float)
+grouped_sales = df_2010.groupby('Developer')['Total Sales'].sum()
+sorted_sales = grouped_sales.sort_values(ascending=False)
+print(sorted_sales.head(10))
+
+#2020 sales
+df_2020['Total Sales'] = df_2020['Total Sales'].str[:-1].astype(float)
+grouped_sales = df_2020.groupby('Developer')['Total Sales'].sum()
+sorted_sales = grouped_sales.sort_values(ascending=False)
+print(sorted_sales.head(10))
+-------------------------
