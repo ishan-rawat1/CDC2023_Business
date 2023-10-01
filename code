@@ -1053,20 +1053,6 @@ top_10_diff_2020 = valid_df_2020.sort_values(by='Difference', ascending=False).h
 # Displaying the Console(s) with the maximum difference
 print("2020")
 print(top_10_diff_2020[['Console', 'Difference']])
-
-#To find the average Japanese sales, North American sales and PAL sales and other sales
-
-grouped_1970 = df_1970.groupby('Japan Sales')['Total Sales'].apply(list).reset_index()
-
-
-for index, row in grouped_1970.iterrows():
-    # Filter out invalid scores
-    valid_scores_1970 = [game for game in row['Japan Sales'] if game != '' and pd.notna(game) and isinstance(game, (int, float))]
-
-    if valid_scores_1970:
-        percentage_1970 = (grouped_1970['Japan Sales'] /grouped_1970['Total Sales']) * 100
-        average_percentage = percentage_1970.mean()
-        print("The average percentage sales for Japan is : ", average_percentage)
 -------------------------
 
 
