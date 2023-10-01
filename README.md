@@ -102,7 +102,7 @@ for index, row in grouped1.iterrows():
         avg_scores_dict[row['Publisher']] = (avg, len(valid_scores))
 
 # Sorting publishers by their average scores in descending order
-sorted_publishers = sorted(avg_scores_dict.items(), key=lambda x: (x[1][0], x[1][1]), reverse=True)
+sorted_publishers = sorted(avg_scores_dict.items(), key=lambda x: (x[1][0], x[1][1]), reverse=True)    ## This line of code was made through the information from open sources and Chat-GPT
 
 for publisher, (avg, count) in sorted_publishers:
     print(f"Publisher: {publisher}")
