@@ -1,6 +1,6 @@
 Business Track Data Analysis
 
-```python
+
 import numpy as np
 import matplotlib.pyplot as plt
 from google.colab import files
@@ -115,5 +115,5 @@ top_10_diff = valid_df.sort_values(by='Difference', ascending=False).head(10)
 
 # Displaying the publishers with the maximum difference
 print(top_10_diff[['Publisher', 'Difference']])
-```
+
 
