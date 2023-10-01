@@ -1,4 +1,4 @@
-## Folder for storing datasets
-# Business_Dataset.xlsx - initial dataset
-# Business_Dataset.csv - converted from xlsx to csv
-# no colab.csv - edited dataset with formated date (mm/dd/year)
+##Folder for storing datasets
+#Business_Dataset.xlsx - initial dataset
+#Business_Dataset.csv - converted from xlsx to csv
+#no colab.csv - edited dataset with formated date (mm/dd/year)
